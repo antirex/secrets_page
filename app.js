@@ -5,7 +5,9 @@ const ejs = require("ejs");
 const app = express();
 const mongoose = require("mongoose");
 const encrypt = require("mongoose-encryption");
-const hash = require("md5");
+// const hash = require("md5"); can generate 20 billion hashes/second
+const bcrypt = require("bcrypt"); // can generate 17k hases/second
+const saltRounds = 10; //dont use many rounds it might take days :) ......greater Sr's more secure!
 
 app.use(express.static("public"));
 app.set("view engine", "ejs");
@@ -38,41 +40,41 @@ app.get("/register", function (req, res) {
 });
 
 app.post("/register", function (req, res) {
-  const newUser = new User({
-    email: req.body.username,
-    key: hash(req.body.password)
-  });
-  newUser.save(function (err) {
-    if (err) {
-      console.log(err);
-    } else {
-      res.render("secrets");
-    }
+  bcrypt.hash(req.body.password, saltRounds, function (err, hash) {
+    const newUser = new User({
+      email: req.body.username,
+      key: hash
+    });
+    newUser.save(function (err) {
+      if (err) {
+        console.log(err);
+      } else {
+        res.render("secrets");
+      }
+    });
   });
 });
 
-app.post("/login",function(req,res){
-    const userName = req.body.username;
-    const password = hash(req.body.password);
-    User.findOne({email: userName},function(err,foundUser){
-        if(err){
-           console.log(err);
-           
+app.post("/login", function (req, res) {
+  const userName = req.body.username;
+  const password = req.body.password;
+  User.findOne({ email: userName }, function (err, foundUser) {
+    if (err) {
+      console.log(err);
+    } else {
+      if (foundUser) {
+        bcrypt.compare(password, foundUser.key, function(err, result) {
+          if (result === true) {
+          res.render("secrets");
+        } else {
+          res.render("partial_success");
         }
-        else{
-            if(foundUser){
-                if(foundUser.key === password){
-                    res.render("secrets");
-                }
-                else{
-                    res.render("partial_success");
-                }
-            }
-            else{
-                res.render("fail");
-            }
-        }
-    })
+      });
+      } else {
+        res.render("fail");
+      }
+    }
+  });
 });
 
 app.listen(3000, function () {
