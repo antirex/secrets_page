@@ -1,0 +1,21 @@
+
+body {
+  background-color: #000000;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.centered {
+    padding-top: 200px;
+    text-align: center;
+}
+
+.secret-text {
+  text-align: center;
+  font-size: 2rem;
+  color: #fff;
+  background-color: #000;
+}
+
+.home{
+  padding: 3rem;
+}
