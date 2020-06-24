@@ -29,7 +29,7 @@ app.use(
 app.use(passport.initialize()); //initialize the passport package
 app.use(passport.session()); //ask passport to use that session
 
-mongoose.connect("mongodb://localhost:27017/userDB", {
+mongoose.connect("mongodb+srv://Admin-anshul:anshulbamb@cluster0-xiyil.mongodb.net/userDB?retryWrites=true&w=majority", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
