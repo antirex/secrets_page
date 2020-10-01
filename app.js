@@ -79,7 +79,7 @@ passport.use(
 );
 
 app.get("/", function (req, res) {
-  res.render("home");
+  res.render("home page");
 });
 
 app.get(
@@ -97,11 +97,11 @@ app.get(
 );
 
 app.get("/login", function (req, res) {
-  res.render("login");
+  res.render("log in");
 });
 
 app.get("/register", function (req, res) {
-  res.render("register");
+  res.render("register now");
 });
 
 app.get("/secrets", function (req, res) {
@@ -118,7 +118,7 @@ app.get("/secrets", function (req, res) {
 
 app.get("/submit", function (req, res) {
   if (req.isAuthenticated()) {
-    res.render("submit");
+    res.render("ok");
   } else {
     res.redirect("login");
   }
@@ -180,5 +180,5 @@ app.post("/submit", function (req, res) {
 });
 
 app.listen(process.env.PORT || 3000, function () {
-  console.log("Your server is live and running successfully!");
+  console.log("The Server is live and running smoothly");
 });
