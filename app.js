@@ -181,4 +181,5 @@ app.post("/submit", function (req, res) {
 
 app.listen(process.env.PORT || 3000, function () {
   console.log("Your server is live and running successfully!");
+  console.log("Isn't that great ?");
 });
