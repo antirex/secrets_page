@@ -2,11 +2,15 @@
 body {
   background-color: #000000;
   font-family: 'Montserrat', sans-serif;
+  font-weight: 'Bold';
+  font-size: 12;
 }
 
 .centered {
     padding-top: 200px;
     text-align: center;
+    background-color: red;
+    
 }
 
 .secret-text {
