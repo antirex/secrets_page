@@ -5,17 +5,17 @@ body {
 }
 
 .centered {
-    padding-top: 200px;
+    padding-top: 210px;
     text-align: center;
 }
 
 .secret-text {
-  text-align: center;
-  font-size: 2rem;
+  text-align: left;
+  font-size: 3rem;
   color: #fff;
   background-color: #000;
 }
 
 .home{
-  padding: 3rem;
+  padding: 4rem;
 }
