@@ -157,6 +157,7 @@ app.post("/login", function (req, res) {
       console.log(err);
     } else {
       passport.authenticate("local")(req, res, function () {
+        console.log("The page is being redirected to secrets.html");
         res.redirect("secrets");
       });
     }
@@ -180,5 +181,6 @@ app.post("/submit", function (req, res) {
 });
 
 app.listen(process.env.PORT || 3000, function () {
+  console.log(process.env.PORT);
   console.log("Your server is live and running successfully!");
 });
