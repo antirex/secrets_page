@@ -5,9 +5,9 @@ const ejs = require("ejs");
 const app = express();
 const mongoose = require("mongoose");
 const encrypt = require("mongoose-encryption");
-// const hash = require("md5"); can generate 20 billion hashes/second
-// const bcrypt = require("bcrypt");  can generate 17k hases/second
-// const saltRounds = 10; dont use many rounds it might take days :) ......greater Sr's more secure!
+const hash = require("md5"); can generate 20 billion hashes/second
+const bcrypt = require("bcrypt");  can generate 17k hases/second
+const saltRounds = 10; dont use many rounds it might take days :) ......greater Sr's more secure!
 const session = require("express-session");
 const passport = require("passport");
 const passportLocalMongoose = require("passport-local-mongoose"); //will salt and hash the user's password automatically!
@@ -36,19 +36,19 @@ mongoose.connect("mongodb+srv://Admin-anshul:anshulbamb@cluster0-xiyil.mongodb.n
 
 mongoose.set("useCreateIndex", true);
 
-const userScehma = new mongoose.Schema({
+const userSchema = new mongoose.Schema({
   email: String,
   key: String,
   googleId: String,
   secret: String,
 });
 
-userScehma.plugin(passportLocalMongoose);
-userScehma.plugin(findOrCreate);
+userSchema.plugin(passportLocalMongoose);
+userSchema.plugin(findOrCreate);
 
-// userScehma.plugin(encrypt,{ secret: process.env.SECRET, encryptedFields: ["key"]});
+userSchema.plugin(encrypt,{ secret: process.env.SECRET, encryptedFields: ["key"]});
 
-const User = mongoose.model("User", userScehma);
+const User = mongoose.model("User", userSchema);
 
 passport.use(User.createStrategy());
 
@@ -96,10 +96,12 @@ app.get(
   }
 );
 
+//login render
 app.get("/login", function (req, res) {
   res.render("login");
 });
 
+//register render
 app.get("/register", function (req, res) {
   res.render("register");
 });
@@ -179,6 +181,6 @@ app.post("/submit", function (req, res) {
   });
 });
 
-app.listen(process.env.PORT || 3000, function () {
-  console.log("Your server is live and running successfully!");
+app.listen(process.env.PORT || 4000, function () {
+  console.log("The server is live and is running!");
 });
