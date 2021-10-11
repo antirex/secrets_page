@@ -7,6 +7,7 @@ const mongoose = require("mongoose");
 const encrypt = require("mongoose-encryption");
 // const hash = require("md5"); can generate 20 billion hashes/second
 // const bcrypt = require("bcrypt");  can generate 17k hases/second
+// const bcrypt = require("bcrypt");  can generate 17k hases/second
 // const saltRounds = 10; dont use many rounds it might take days :) ......greater Sr's more secure!
 const session = require("express-session");
 const passport = require("passport");
